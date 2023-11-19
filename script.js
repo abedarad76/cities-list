@@ -9,7 +9,32 @@ async function getCities() {
     const json = await response.json();
 
     buttenText.innerHTML = "get Button plus Icon";
-    console.log(json);
+    console.log(json.data);
+    
+
+    const table = document.getElementById("table-content")
+
+
+    json.data.slice(0,10).forEach((item) => {
+      const tableRow = document.createElement("tr");
+      tableRow.setAttribute("class", "mdc-data-table__row");
+
+      const cityCall = document.createElement("td");
+      cityCall.setAttribute("class","mdc-data-table__cell mdc-data-table__cell--numeric"
+      );
+      cityCall.innerHTML = item.city;
+      tableRow.appendChild(cityCall);
+
+      const countryCall = document.createElement("td");
+      countryCall.setAttribute(
+        "class",
+        "mdc-data-table__cell mdc-data-table__cell--numeric"
+      );
+      countryCall.innerHTML = item.country;
+      tableRow.appendChild(countryCall);
+
+      table.appendChild(tableRow)
+    });
   } catch (error) {
     console.log("amirrr", error);
   }
